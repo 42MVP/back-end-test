@@ -41,12 +41,10 @@ jobs:
         run: npm install
         
       - name: Prettier Action
-        uses: creyD/prettier_action@v4.3
-        with:
-          prettier_options: --write src/**/*.{ts} test/**/*.{ts}
+        run: npm run format
 
       - name: ESLint Action eslintrc
-        uses: mrdivyansh/eslint-action@v1.0.7
+        run: npm run lint
                 
       - name: npm run test
         run:  npm run test:e2e
