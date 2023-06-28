@@ -40,8 +40,8 @@ jobs:
       - name: npm install
         run: npm install
                 
-      - name: npm run
-        run:  npm run start
+      - name: npm run test
+        run:  npm run test:e2e
         env:
           POSTGRES_HOST: 127.0.0.1
           POSTGRES_PORT: 5432
