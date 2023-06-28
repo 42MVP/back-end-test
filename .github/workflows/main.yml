@@ -39,6 +39,12 @@ jobs:
           
       - name: npm install
         run: npm install
+        
+      - name: Prettier Action
+        uses: creyD/prettier_action@v4.3
+
+      - name: ESLint Action eslintrc
+        uses: mrdivyansh/eslint-action@v1.0.7
                 
       - name: npm run test
         run:  npm run test:e2e
