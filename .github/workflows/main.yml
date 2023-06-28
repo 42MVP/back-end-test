@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Test unit
-        run: npm test
+        run: npm run test:e2e
 
       - name: run
         run: npm run start
