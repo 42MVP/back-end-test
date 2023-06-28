@@ -1,0 +1,29 @@
+name: development CI
+
+on: [push, pull_request]
+
+jobs:
+  dev_CI:
+    runs-on: macos-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test unit
+        run: npm test
+
+      - name: run
+        run: npm run start
