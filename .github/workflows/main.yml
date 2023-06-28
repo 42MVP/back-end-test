@@ -8,9 +8,12 @@ jobs:
     services:
       postgres:
         image: postgres
-        
         ports:
           - 5432:5432
+        env:
+          POSTGRES_DB: postgres        
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
 
     strategy:
       matrix:
@@ -26,9 +29,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       
       - name: make .env file
-        uses: SpicyPizza/create-envfile@v1  # .env파일을 만들어주는 액션
+        uses: SpicyPizza/create-envfile@v1
         with:
-          POSTGRES_HOST: localhost
+          POSTGRES_HOST: 127.0.0.1
           POSTGRES_PORT: 5432
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
