@@ -5,6 +5,12 @@ on: [push, pull_request]
 jobs:
   dev_CI:
     runs-on: macos-latest
+    services:
+      postgres:
+        image: postgres
+        
+        ports:
+          - 54322
 
     strategy:
       matrix:
@@ -18,9 +24,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Install dependencies
+      
+      - name: make .env file
+        uses: SpicyPizza/create-envfile@v1  # .env파일을 만들어주는 액션
+        with:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+          
+      - name: npm install
         run: npm install
-
-      - name: run
-        run: npm run start
+          
+      - name: npm run
+        run:  npm run start
