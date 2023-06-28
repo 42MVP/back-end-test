@@ -8,7 +8,7 @@ export class User extends BaseEntity {
   id: number;
 
   @Column({ type: 'varchar', length: 20, nullable: false })
-  intraId: string;
+    intraId: string;
 
   @Column()
   userName: string;
