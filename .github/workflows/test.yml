@@ -3,7 +3,6 @@ name: TEST-CI
 on:
   pull_request:
     branches: [ "develop" ]
-	
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -11,16 +10,13 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         node-version: [20.x]
-	
     steps:
       - name: Copy repository
         uses: actions/checkout@v3
-	
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-	
       - name: npm build, test?
         run: |
           npm install
