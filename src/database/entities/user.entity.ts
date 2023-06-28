@@ -5,7 +5,7 @@ import { CreateUserDto } from 'src/user/dto/create-user.dto';
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+    id: number;
 
   @Column({ type: 'varchar', length: 20, nullable: false })
   intraId: string;
