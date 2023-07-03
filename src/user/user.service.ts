@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from '../database/entities/user.entity';
@@ -22,8 +22,28 @@ export class UserService {
     return result;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number): Promise<User> {
+    const user = await this.usersRepository.findOne({
+      where: {
+        id: id,
+      },
+    });
+    if (!user) {
+      throw new NotFoundException('유저를 찾을 수 없습니다.');
+    }
+    return user;
+  }
+
+  async findOneByUserName(userName: string): Promise<User> {
+    const user = await this.usersRepository.findOne({
+      where: {
+        userName: userName,
+      },
+    });
+    if (!user) {
+      throw new NotFoundException('유저를 찾을 수 없습니다.');
+    }
+    return user;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

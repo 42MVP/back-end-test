@@ -5,27 +5,26 @@ import { CreateUserDto } from 'src/user/dto/create-user.dto';
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-    id: number;
+  id: number;
 
   @Column({ type: 'varchar', length: 20, nullable: false })
   intraId: string;
 
-  @Column()
+  @Column({ type: 'varchar', nullable: false })
   userName: string;
 
-  @Column()
+  @Column({ type: 'varchar', nullable: false })
   password: string;
 
-  @Column()
+  @Column({ type: 'boolean', default: false })
   isAuth: boolean;
 
-  @Column()
-  avatar: string;
+  @Column({ type: 'bytea', nullable: true })
+  avatar: Buffer;
 
-  @Column()
+  @Column({ type: 'varchar', nullable: true })
   email: string;
 
-  @Column({ type: 'enum', enum: UserStatus })
   status: UserStatus;
 
   static from(createUserDto: CreateUserDto): User {
@@ -36,7 +35,6 @@ export class User extends BaseEntity {
     user.isAuth = createUserDto.isAuth;
     user.avatar = createUserDto.avatar;
     user.email = createUserDto.email;
-    user.status = UserStatus.ONLINE;
     return user;
   }
 }
